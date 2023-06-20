@@ -67,6 +67,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.set_default_size(600, 700)
         self.set_title("gnome-background-properties")
         lightImageBtn = Gtk.Button(label = "Light Wallpapper")
+        lightImageBtn.set_margin_top(40)
         dareImageBtn = Gtk.Button(label = "Dark Wallpapper")
 
         okBtn = Gtk.Button(label = "OK")
@@ -79,11 +80,16 @@ class MainWindow(Gtk.ApplicationWindow):
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box2 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        boxSeperator = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        boxSeperator.set_hexpand(True)
+        boxSeperator.set_vexpand(True)
 
 
         self.set_child(box)
         box.append(lightImageBtn)
         box.append(dareImageBtn)
+        box.append(boxSeperator)
+
         box.append(box2)
         box2.append(cancelBtn)
         box2.append(okBtn)
@@ -98,6 +104,6 @@ class APP(Gtk.Application):
         self.win = MainWindow(application=app)
         self.win.present()
 
-app = APP(application_id="com.example.GtkApplication")
+app = APP(application_id="com.0x1F8F.GnomeBackgroundProperties")
 app.run(sys.argv)
 
