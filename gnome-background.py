@@ -1,11 +1,14 @@
 #!/bin/python3
 import sys
 import os
-import gi
-gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk
-from gi.overrides.Gdk import Gdk
-
+try:
+    import gi
+    gi.require_version('Gtk', '4.0')
+    from gi.repository import Gtk
+    from gi.overrides.Gdk import Gdk
+except ImportError as err:
+    print("[ Error ] : Cannot import Gtk4 python api")
+    exit()
 
 css_provider = Gtk.CssProvider()
 css_provider.load_from_path('style.css')
@@ -20,7 +23,6 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def __file_chooser(self,req):
         self._req = req
-        print("\tOpening dialog ....")
         dialog = Gtk.FileChooserDialog( title=self._req ,parent=self, action = Gtk.FileChooserAction.OPEN)
         dialog.add_button("Cancel",Gtk.ResponseType.CANCEL)
         dialog.add_button("OK",Gtk.ResponseType.OK)
@@ -34,20 +36,19 @@ class MainWindow(Gtk.ApplicationWindow):
             HOME = os.getenv("HOME")
             Path = "/.local/share/gnome-background-properties/Theme.xml.in"
             xml = f"""<?xml version="1.0"?>
-    <!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
-    <wallpapers>
-      <wallpaper deleted="false">
-        <name>Arch Background</name>
-        <filename>{Light}</filename>
-        <filename-dark>{Dark}</filename-dark>
-        <options>zoom</options>
-        <shade_type>solid</shade_type>
-        <pcolor>#3071AE</pcolor>
-        <scolor>#000000</scolor>
-      </wallpaper>
-    </wallpapers>"""
+            <!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+            <wallpapers>
+              <wallpaper deleted="false">
+                <name>Background</name>
+                <filename>{Light}</filename>
+                <filename-dark>{Dark}</filename-dark>
+                <options>zoom</options>
+                <shade_type>solid</shade_type>
+                <pcolor>#3071AE</pcolor>
+                <scolor>#000000</scolor>
+              </wallpaper>
+            </wallpapers>"""
             print(f"\nDark:{Dark}\nLight:{Light}")
-
             with open(HOME+Path,"w") as file :
                 file.write(xml)
             print("Successfully written")
@@ -66,9 +67,9 @@ class MainWindow(Gtk.ApplicationWindow):
         }
         self.set_default_size(600, 700)
         self.set_title("gnome-background-properties")
-        lightImageBtn = Gtk.Button(label = "Light Wallpapper")
+        lightImageBtn = Gtk.Button(label = "Light Wallpaper")
         lightImageBtn.set_margin_top(40)
-        dareImageBtn = Gtk.Button(label = "Dark Wallpapper")
+        dareImageBtn = Gtk.Button(label = "Dark Wallpaper")
 
         okBtn = Gtk.Button(label = "OK")
         cancelBtn = Gtk.Button(label = "Cancel")
