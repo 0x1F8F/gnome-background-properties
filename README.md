@@ -4,10 +4,15 @@ Add extra light theme and dark theme backgrounds in gnome
 
 ![APP](https://github.com/0x1F8F/gnome-background-properties/blob/master/app.png)
 
-**Install & Run**
+**INSTALL**
+
 `git clone https://github.com/0x1F8F/gnome-background-properties.git`
 
 `cd gnome-background-properties`
+
+
+**RUN**
+
 
 `chmod +x gnome-background.py && ./gnome-background.py`
 or
